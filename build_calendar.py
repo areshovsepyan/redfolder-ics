@@ -28,7 +28,7 @@ FEEDS = [
 
 CURRENCIES = {c.strip().upper() for c in os.getenv("CURRENCIES", "USD").split(",") if c.strip()}
 IMPACTS = {i.strip().capitalize() for i in os.getenv("IMPACTS", "High").split(",") if i.strip()}
-ICON = {"High": "🔴", "Medium": "🟠", "Low": "🟡"}
+ICON = {"High": "🟥", "Medium": "🟧", "Low": "🟨"}
 ALERTS = [int(m) for m in os.getenv("ALERT_MINUTES", "15").split(",") if m.strip()]
 KEEP_DAYS = int(os.getenv("KEEP_DAYS", "45"))
 EVENT_MIN = int(os.getenv("EVENT_MINUTES", "15"))
