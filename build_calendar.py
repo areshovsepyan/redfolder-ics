@@ -147,12 +147,14 @@ def main():
         if ev["previous"]:
             desc.append(f"Previous: {ev['previous']}")
         impact = ev.get("impact", "High")
+        # Show the currency in the title only when tracking more than one
+        prefix = "" if len(CURRENCIES) == 1 else ev["country"] + " "
         desc.append(f"Source: Forex Factory ({impact} impact)")
         L += [
             "BEGIN:VEVENT", f"UID:{u}", f"DTSTAMP:{now}",
             f"DTSTART:{s.strftime('%Y%m%dT%H%M%SZ')}",
             f"DTEND:{e.strftime('%Y%m%dT%H%M%SZ')}",
-            f"SUMMARY:{esc(ICON.get(impact, '') + ' ' + ev['country'] + ' ' + ev['title'])}",
+            f"SUMMARY:{esc(ICON.get(impact, '') + ' ' + prefix + ev['title'])}",
             f"DESCRIPTION:{esc(chr(10).join(desc))}",
             "URL:https://www.forexfactory.com/calendar",
             "TRANSP:TRANSPARENT",
