@@ -1,0 +1,32 @@
+name: Update red folder calendar
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # hourly; GitHub may delay scheduled runs by a few minutes
+  workflow_dispatch:        # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build ICS
+        env:
+          CURRENCIES: "USD"        # e.g. "USD,EUR,GBP,JPY,CNY"
+          IMPACTS: "High,Medium"          # e.g. "High,Medium"
+          ALERT_MINUTES: "15"      # e.g. "30,5" or "" for no reminders
+          KEEP_DAYS: "45"
+        run: python build_calendar.py
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --cached --quiet || git commit -m "Update red folder calendar"
+          git push
