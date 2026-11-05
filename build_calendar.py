@@ -97,6 +97,8 @@ def main():
     if os.path.exists(STATE_PATH):
         with open(STATE_PATH, encoding="utf-8") as f:
             state = json.load(f)
+    old_state = dict(state)  # snapshot, to keep DTSTAMP stable for unchanged events
+    now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
     for feed in load_source():
         dated = [parse_dt(e["date"]) for e in feed if e.get("date")]
@@ -115,7 +117,7 @@ def main():
                 continue
             start = parse_dt(e["date"])
             u = uid_for(e["title"], e["country"], start)
-            state[u] = {
+            rec = {
                 "title": e["title"],
                 "country": e["country"],
                 "impact": e["impact"],
@@ -123,6 +125,11 @@ def main():
                 "forecast": e.get("forecast") or "",
                 "previous": e.get("previous") or "",
             }
+            prev = old_state.get(u)
+            same = prev is not None and all(prev.get(k) == v for k, v in rec.items())
+            rec["stamp"] = (prev.get("stamp") if same else None) or now
+            state[u] = rec
+          
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=KEEP_DAYS)
     state = {u: ev for u, ev in state.items() if parse_dt(ev["start"]) >= cutoff}
@@ -130,7 +137,6 @@ def main():
     with open(STATE_PATH, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(state.items(), key=lambda kv: kv[1]["start"])), f, indent=1)
 
-    now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     cal_name = f"Red Folder ({', '.join(sorted(CURRENCIES)) or 'All'})"
     L = [
         "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//redfolder-ics//EN",
@@ -151,7 +157,7 @@ def main():
         prefix = "" if len(CURRENCIES) == 1 else ev["country"] + " "
         desc.append(f"Source: Forex Factory ({impact} impact)")
         L += [
-            "BEGIN:VEVENT", f"UID:{u}", f"DTSTAMP:{now}",
+            "BEGIN:VEVENT", f"UID:{u}", f"DTSTAMP:{ev.get('stamp', now)}",
             f"DTSTART:{s.strftime('%Y%m%dT%H%M%SZ')}",
             f"DTEND:{e.strftime('%Y%m%dT%H%M%SZ')}",
             f"SUMMARY:{esc(ICON.get(impact, '') + ' ' + prefix + ev['title'])}",
