@@ -88,5 +88,59 @@
   "forecast": "",
   "previous": "4.7%",
   "stamp": "20261105T181157Z"
+ },
+ "7c8c4dd723fce9bbc8df@redfolder": {
+  "title": "FOMC Member Waller Speaks",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-10T09:00:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "stamp": "20261108T102955Z"
+ },
+ "fb35138dca632d229b8e@redfolder": {
+  "title": "Core CPI m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-10T13:30:00+00:00",
+  "forecast": "0.2%",
+  "previous": "0.3%",
+  "stamp": "20261108T102955Z"
+ },
+ "f45ea02886569a925730@redfolder": {
+  "title": "CPI m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-10T13:30:00+00:00",
+  "forecast": "0.3%",
+  "previous": "0.6%",
+  "stamp": "20261108T102955Z"
+ },
+ "c32bf5a59cc316c02b37@redfolder": {
+  "title": "Unemployment Claims",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-12T13:30:00+00:00",
+  "forecast": "194K",
+  "previous": "189K",
+  "stamp": "20261108T102955Z"
+ },
+ "c50148be2a2401b016c9@redfolder": {
+  "title": "Core PPI m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-13T13:30:00+00:00",
+  "forecast": "0.3%",
+  "previous": "0.7%",
+  "stamp": "20261108T102955Z"
+ },
+ "a57109d88311699b2e41@redfolder": {
+  "title": "PPI m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-13T13:30:00+00:00",
+  "forecast": "0.4%",
+  "previous": "1.3%",
+  "stamp": "20261108T102955Z"
  }
 }
