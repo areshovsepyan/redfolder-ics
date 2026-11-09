@@ -116,6 +116,16 @@
   "previous": "0.6%",
   "stamp": "20261108T102955Z"
  },
+ "13c482f5cc762536d3fe@redfolder": {
+  "title": "Bank Holiday",
+  "country": "USD",
+  "impact": "Holiday",
+  "start": "2026-11-11T13:00:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "day": "2026-11-11",
+  "stamp": "20261109T214902Z"
+ },
  "c32bf5a59cc316c02b37@redfolder": {
   "title": "Unemployment Claims",
   "country": "USD",
