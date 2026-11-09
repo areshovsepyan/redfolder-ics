@@ -1,12 +1,13 @@
 # redfolder-ics
 
-Auto-updating calendar feed of Forex Factory **high- and medium-impact** economic events, ready to subscribe to in Apple Calendar (iPhone, iPad, Mac), Google Calendar, or Outlook.
+Auto-updating calendar feed of Forex Factory **high- and medium-impact** economic events and **bank holidays**, ready to subscribe to in Apple Calendar (iPhone, iPad, Mac), Google Calendar, or Outlook.
 
 A GitHub Action runs on a schedule, pulls Forex Factory's public weekly feed, keeps only the impact levels and currencies you choose, and publishes a standard `.ics` file. Your calendar app subscribes to that file once and stays in sync on its own.
 
 ```
-🔴 Non-Farm Employment Change     Fri 17:30 – 17:45
-🟠 Unemployment Claims            Thu 17:30 – 17:45
+🏦 Bank Holiday                   Wed   all-day
+🟧 Unemployment Claims            Thu   17:30 – 17:45
+🟥 Non-Farm Employment Change     Fri   17:30 – 17:45
 ```
 
 > Times are shown in your device's local time zone automatically.
@@ -16,6 +17,7 @@ A GitHub Action runs on a schedule, pulls Forex Factory's public weekly feed, ke
 ## Features
 
 - **Impact filter**: high only (red folder), or high + medium (orange folder), or all.
+- **Bank holidays**: optional all-day events (grey folder) on the date Forex Factory lists them, without reminders.
 - **Currency filter**: one currency or several (`USD`, `EUR,GBP,JPY`, …).
 - **Reminders**: built-in alerts at configurable lead times (e.g. 30 and 5 minutes before).
 - **History**: past weeks stay on the calendar for a configurable number of days.
@@ -55,7 +57,7 @@ Without this, the workflow cannot save the calendar file.
 
 **Actions → Update red folder calendar → Run workflow.**
 
-After about 15 seconds, the run turns green and a `docs/` folder appears in the repository containing:
+After about 15 seconds, the run turns green, and a `docs/` folder appears in the repository containing:
 
 | File | Purpose |
 |---|---|
@@ -69,7 +71,7 @@ https://raw.githubusercontent.com/<USERNAME>/<REPO>/<BRANCH>/docs/redfolder.ics
 ```
 
 - `<BRANCH>` is your default branch, usually `main` or `master` (shown at the top left of the repo's Code tab).
-- Paste the URL into a browser first. You should see text starting with `BEGIN:VCALENDAR`. A 404 means the username, repo or branch is wrong, or the first run hasn't finished.
+- Paste the URL into a browser first. You should see text starting with `BEGIN:VCALENDAR`. A 404 means the username, repo, or branch is wrong, or the first run hasn't finished.
 
 ### 5. Subscribe
 
@@ -78,7 +80,7 @@ https://raw.githubusercontent.com/<USERNAME>/<REPO>/<BRANCH>/docs/redfolder.ics
 1. Open **Calendar** → **Calendars** → **Add Calendar** → **Add Subscription Calendar**.
 2. Paste the feed URL → **Subscribe**.
 3. Set **Account** to **iCloud** (syncs to all your Apple devices).
-4. Pick a color that doesn't clash with the 🔴/🟠 markers. Purple works well.
+4. Pick a color that doesn't clash with the 🟥/🟧 markers. Purple works well.
 5. Keep **Event Alerts** on.
 6. Under **Subscription Details**:
    - **Remove Alerts**: **Off** (otherwise reminders are stripped)
@@ -103,7 +105,7 @@ All settings live in `.github/workflows/update.yml` under `env:`:
 ```yaml
 env:
   CURRENCIES: "USD"        # e.g. "USD,EUR,GBP,JPY,CNY"
-  IMPACTS: "High,Medium"   # High, Medium, Low
+  IMPACTS: "High,Medium,Holiday"   # High, Medium, Low, Holiday
   ALERT_MINUTES: "15"      # e.g. "30,5"; "" for no reminders
   KEEP_DAYS: "45"          # days of past events to keep
 ```
@@ -111,8 +113,8 @@ env:
 | Variable | Default | Description |
 |---|---|---|
 | `CURRENCIES` | `USD` | Currencies to include, comma-separated. With a single currency, the code is left out of event titles. With several, titles are prefixed (`USD Non-Farm …`). |
-| `IMPACTS` | `High` | Impact levels to include: `High`, `Medium`, `Low`. |
-| `ALERT_MINUTES` | `15` | Reminder lead times in minutes, comma-separated. Empty disables reminders. |
+| `IMPACTS` | `High` | Impact levels to include: `High`, `Medium`, `Low`, `Holiday`. Holidays follow `CURRENCIES` (USD only → US holidays only). |
+| `ALERT_MINUTES` | `15` | Reminder lead times in minutes, comma-separated. Empty disables reminders. Not applied to holidays. |
 | `KEEP_DAYS` | `45` | How many days of past events stay on the calendar. |
 | `EVENT_MINUTES` | `15` | Length of each calendar block, in minutes. |
 
@@ -123,10 +125,10 @@ Changes take effect on the next run. To apply them immediately, use **Actions �
 The markers are set in `build_calendar.py`:
 
 ```python
-ICON = {"High": "🔴", "Medium": "🟠", "Low": "🟡"}
+ICON = {"High": "🟥", "Medium": "🟧", "Low": "🟨", "Holiday": "🏦"}
 ```
 
-Any emoji works, for example `🚨 / ⚠️`, `🟥 / 🟧` or `📕 / 📙`. Calendar titles are plain text, so images (such as Forex Factory's folder icons) are not possible.
+Any emoji works, for example `🔴 / 🟠`, `🚨 / ⚠️` or `📕 / 📙`. Calendar titles are plain text, so images (such as Forex Factory's folder icons) are not possible.
 
 ---
 
@@ -138,10 +140,13 @@ Forex Factory weekly feed ──► GitHub Action (scheduled) ──► docs/red
 ```
 
 1. **Fetch**: downloads Forex Factory's current-week feed (and next week's, if available).
-2. **Filter**: keeps only the configured impact levels and currencies; bank holidays are skipped.
+2. **Filter**: keeps only the configured impact levels and currencies.
 3. **Merge**: the feed only covers one week, so events are stored in `docs/events.json`. For the dates the feed covers, the feed is treated as the source of truth: stored events in that range are replaced, which handles reschedules, cancellations, and impact changes.
-4. **Write**: each event gets a stable ID (currency + title + date), so updates replace the existing calendar entry instead of creating duplicates. Times are written in UTC; calendar apps convert them to local time.
-5. **Commit**: only when the output actually changed.
+4. **Write**: each event gets a stable ID (currency + title + date), so updates replace the existing calendar entry instead of creating duplicates.
+   - **Timed events** are written in UTC; calendar apps convert them to local time.
+   - **Bank holidays** are written as all-day events on the date Forex Factory lists them (New York date), with no reminders. Forex Factory's placeholder midnight time is ignored.
+   - All events are marked **free** (`TRANSP:TRANSPARENT`), so they don't block your availability in scheduling tools.
+5. **Commit**: only when the output actually changes. Each event's `DTSTAMP` is kept stable until its time, impact, forecast, or previous value changes.
 
 ### Update timing
 
@@ -163,7 +168,7 @@ Reminders are scheduled on your device, so they fire on time regardless of when 
 | Symptom | Fix |
 |---|---|
 | Run fails at the **Commit** step | Enable **Read and write permissions** (Quick start, step 2). |
-| Feed URL returns 404 | Check username, repo name (case-sensitive) and branch name in the URL. |
+| Feed URL returns 404 | Check username, repo name (case-sensitive), and branch name in the URL. |
 | No reminders on iPhone | Subscription settings: **Event Alerts** on, **Remove Alerts** off. |
 | Times look wrong | iPhone: **Settings → Apps → Calendar → Time Zone Override** should be off. |
 | Scheduled runs are irregular or missing | Normal for new repositories: GitHub delays or skips scheduled runs under load. It usually settles within days. Changing the cron minute in `update.yml` can re-register a stuck schedule. |
