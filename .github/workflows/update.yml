@@ -19,7 +19,7 @@ jobs:
       - name: Build ICS
         env:
           CURRENCIES: "USD"        # e.g. "USD,EUR,GBP,JPY,CNY"
-          IMPACTS: "High,Medium"          # e.g. "High,Medium"
+          IMPACTS: "High,Medium,Holiday"          # e.g. "High,Medium,Holiday"
           ALERT_MINUTES: "15"      # e.g. "30,5" or "" for no reminders
           KEEP_DAYS: "45"
         run: python build_calendar.py
