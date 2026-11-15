@@ -152,5 +152,86 @@
   "forecast": "0.4%",
   "previous": "1.3%",
   "stamp": "20261108T102955Z"
+ },
+ "9ed810865c75494f4e9e@redfolder": {
+  "title": "Fed Chairman Warsh Speaks",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-16T17:00:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "stamp": "20261115T110351Z"
+ },
+ "e55735fd75d8395062ee@redfolder": {
+  "title": "Core Retail Sales m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-17T13:30:00+00:00",
+  "forecast": "0.4%",
+  "previous": "0.9%",
+  "stamp": "20261115T110351Z"
+ },
+ "b74964af0078da25a109@redfolder": {
+  "title": "Retail Sales m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-17T13:30:00+00:00",
+  "forecast": "0.2%",
+  "previous": "0.8%",
+  "stamp": "20261115T110351Z"
+ },
+ "e0d69b1adb60db4f633a@redfolder": {
+  "title": "FOMC Meeting Minutes",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-18T19:00:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "stamp": "20261115T110351Z"
+ },
+ "d6c6882a5190401cbfce@redfolder": {
+  "title": "Philly Fed Manufacturing Index",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-19T13:30:00+00:00",
+  "forecast": "19.2",
+  "previous": "20.9",
+  "stamp": "20261115T110351Z"
+ },
+ "cac474de7ef9918b9ac3@redfolder": {
+  "title": "Unemployment Claims",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-19T13:30:00+00:00",
+  "forecast": "199K",
+  "previous": "200K",
+  "stamp": "20261115T110351Z"
+ },
+ "adf00226128fbfc9d516@redfolder": {
+  "title": "FOMC Member Waller Speaks",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-20T13:25:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "stamp": "20261115T110351Z"
+ },
+ "44581be47b3af0722170@redfolder": {
+  "title": "Revised UoM Consumer Sentiment",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-20T15:00:00+00:00",
+  "forecast": "52.1",
+  "previous": "51.0",
+  "stamp": "20261115T110351Z"
+ },
+ "467cd0329c91012378c8@redfolder": {
+  "title": "Revised UoM Inflation Expectations",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-20T15:00:00+00:00",
+  "forecast": "",
+  "previous": "4.3%",
+  "stamp": "20261115T110351Z"
  }
 }
