@@ -194,27 +194,27 @@
   "country": "USD",
   "impact": "Medium",
   "start": "2026-11-19T13:30:00+00:00",
-  "forecast": "19.2",
+  "forecast": "20.6",
   "previous": "20.9",
-  "stamp": "20261115T110351Z"
+  "stamp": "20261117T225643Z"
  },
  "cac474de7ef9918b9ac3@redfolder": {
   "title": "Unemployment Claims",
   "country": "USD",
   "impact": "Medium",
   "start": "2026-11-19T13:30:00+00:00",
-  "forecast": "199K",
+  "forecast": "198K",
   "previous": "200K",
-  "stamp": "20261115T110351Z"
+  "stamp": "20261117T225643Z"
  },
  "44581be47b3af0722170@redfolder": {
   "title": "Revised UoM Consumer Sentiment",
   "country": "USD",
   "impact": "Medium",
   "start": "2026-11-20T15:00:00+00:00",
-  "forecast": "52.1",
+  "forecast": "51.7",
   "previous": "51.0",
-  "stamp": "20261115T110351Z"
+  "stamp": "20261117T225643Z"
  },
  "467cd0329c91012378c8@redfolder": {
   "title": "Revised UoM Inflation Expectations",
