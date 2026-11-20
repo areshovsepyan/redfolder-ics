@@ -224,5 +224,14 @@
   "forecast": "",
   "previous": "4.3%",
   "stamp": "20261115T110351Z"
+ },
+ "2149e1a4074cf0e0c28a@redfolder": {
+  "title": "President Trump Speaks",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-20T17:00:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "stamp": "20261120T211156Z"
  }
 }
