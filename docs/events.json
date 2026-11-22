@@ -233,5 +233,78 @@
   "forecast": "",
   "previous": "",
   "stamp": "20261120T211156Z"
+ },
+ "2bc71bd7aebaff202548@redfolder": {
+  "title": "Flash Manufacturing PMI",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-23T14:45:00+00:00",
+  "forecast": "54.5",
+  "previous": "56.0",
+  "stamp": "20261122T065753Z"
+ },
+ "d40fb243230c2003f7b4@redfolder": {
+  "title": "Flash Services PMI",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-23T14:45:00+00:00",
+  "forecast": "55.6",
+  "previous": "57.9",
+  "stamp": "20261122T065753Z"
+ },
+ "20339fd653c763991a4f@redfolder": {
+  "title": "CB Consumer Confidence",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-24T15:00:00+00:00",
+  "forecast": "92.1",
+  "previous": "91.7",
+  "stamp": "20261122T065753Z"
+ },
+ "e90a6f140871c143f2bc@redfolder": {
+  "title": "Core PCE Price Index m/m",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-25T13:30:00+00:00",
+  "forecast": "0.3%",
+  "previous": "0.3%",
+  "stamp": "20261122T065753Z"
+ },
+ "b028b610f15295d7e156@redfolder": {
+  "title": "Prelim GDP q/q",
+  "country": "USD",
+  "impact": "High",
+  "start": "2026-11-25T13:30:00+00:00",
+  "forecast": "3.5%",
+  "previous": "3.4%",
+  "stamp": "20261122T065753Z"
+ },
+ "fcb05596e9ca2e37321b@redfolder": {
+  "title": "Prelim GDP Price Index q/q",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-25T13:30:00+00:00",
+  "forecast": "2.3%",
+  "previous": "2.3%",
+  "stamp": "20261122T065753Z"
+ },
+ "fcd9bf6e21744fc0ac15@redfolder": {
+  "title": "Unemployment Claims",
+  "country": "USD",
+  "impact": "Medium",
+  "start": "2026-11-25T13:30:00+00:00",
+  "forecast": "201K",
+  "previous": "203K",
+  "stamp": "20261122T065753Z"
+ },
+ "66fc74a1ea8d797bd862@redfolder": {
+  "title": "Bank Holiday",
+  "country": "USD",
+  "impact": "Holiday",
+  "start": "2026-11-26T13:00:00+00:00",
+  "forecast": "",
+  "previous": "",
+  "day": "2026-11-26",
+  "stamp": "20261122T065753Z"
  }
 }
